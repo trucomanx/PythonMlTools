@@ -26,54 +26,58 @@ def AllInformation(a,b,bins_a=2,bins_b=2):
     assert bins_b>=2, "The bins number of array \"b\" should be greather than 1.";
     assert len(a) == len(b), "The length of both arrays is not the same.";
     
-    hab=np.zeros((bins_a, bins_b));
-    
     mina=np.min(a);    maxa=np.max(a);  factora=(bins_a-1)/(maxa-mina);
     minb=np.min(b);    maxb=np.max(b);  factorb=(bins_b-1)/(maxb-minb);
     
     a=factora*(a-mina);
     b=factorb*(b-minb);
     
+    # Generating the joint probability hab
+    hab=np.zeros((bins_a, bins_b));
     for n in range(len(a)):
         ida=int(np.round(a[n]));
         idb=int(np.round(b[n]));
         hab[ida][idb]=hab[ida][idb]+1;
-    
-    ha=np.zeros((bins_a, 1));
+    hab=hab/np.sum(hab);
+
+    # Generating the probability ha
+    ha=np.reshape(np.zeros((bins_a, 1)),-1);
     for n in range(len(a)):
         ida=int(np.round(a[n]));
-        ha[ida][0]=ha[ida][0]+1;
-    
-    hb=np.zeros((bins_b, 1));
+        ha[ida]=ha[ida]+1;
+    ha=ha/np.sum(ha);
+
+    # Generating the probability hb
+    hb=np.reshape(np.zeros((bins_b, 1)),-1);
     for n in range(len(b)):
         idb=int(np.round(b[n]));
-        hb[idb][0]=hb[idb][0]+1;
-    
-    ha=ha/np.sum(ha);
+        hb[idb]=hb[idb]+1;
     hb=hb/np.sum(hb);
-    hab=hab/np.sum(hab);
-    
+
     #print(ha)
     #print(hb)
     #print(hab)
     
+    # Mutual information and joint information
     joint=0.0;
     mutual=0.0;
     for na in range(bins_a):
         for nb in range(bins_b):
             if hab[na][nb]!=0 :
                 joint=joint-hab[na][nb]*np.log2(hab[na][nb]);
-                mutual=mutual+hab[na][nb]*np.log2(hab[na][nb]/(ha[na][0]*hb[nb][0]));
+                mutual=mutual+hab[na][nb]*np.log2(hab[na][nb]/(ha[na]*hb[nb]));
     
+    # Information of a
     infa=0.0;
     for na in range(bins_a):
-        if ha[na][0]!=0 :
-            infa=infa-ha[na][0]*np.log2(ha[na][0]);
+        if ha[na]!=0 :
+            infa=infa-ha[na]*np.log2(ha[na]);
     
+    # Information of b
     infb=0.0;
     for nb in range(bins_b):
-        if hb[nb][0]!=0 :
-            infb=infb-hb[nb][0]*np.log2(hb[nb][0]);
+        if hb[nb]!=0 :
+            infb=infb-hb[nb]*np.log2(hb[nb]);
     
     return mutual,joint,infa,infb;
     
