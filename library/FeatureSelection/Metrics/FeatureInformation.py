@@ -16,9 +16,7 @@ Return infb: Real value. Information of a discretized version of a (with bins_a)
 
 '''
 class InformationAnalysis:
-
-        
-        
+    
     def __init__(self, *args):
         self.bins_a=0;
         self.bins_b=0;
@@ -32,7 +30,7 @@ class InformationAnalysis:
         else:
             self.bins_a=0;
             self.bins_b=0;
-            
+        
         
     def SetProbabilitiesFromHistogram(self, a, b, bins_a, bins_b):
         a=np.asarray(a);
