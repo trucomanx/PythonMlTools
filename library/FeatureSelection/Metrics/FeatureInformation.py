@@ -26,11 +26,18 @@ def AllInformation(a,b,bins_a=2,bins_b=2):
     assert bins_b>=2, "The bins number of array \"b\" should be greather than 1.";
     assert len(a) == len(b), "The length of both arrays is not the same.";
     
-    mina=np.min(a);    maxa=np.max(a);  factora=(bins_a-1)/(maxa-mina);
-    minb=np.min(b);    maxb=np.max(b);  factorb=(bins_b-1)/(maxb-minb);
+    mina=np.min(a);    maxa=np.max(a);
+    minb=np.min(b);    maxb=np.max(b);  
     
-    a=factora*(a-mina);
-    b=factorb*(b-minb);
+    if maxa!=mina:
+        a=((bins_a-1)/(maxa-mina))*(a-mina);
+    else:
+        a=a*0.0;
+    
+    if maxb!=minb:
+        b=((bins_b-1)/(maxb-minb))*(b-minb);
+    else:
+        b=b*0.0;
     
     # Generating the joint probability hab
     hab=np.zeros((bins_a, bins_b));
