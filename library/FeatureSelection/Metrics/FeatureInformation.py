@@ -3,20 +3,20 @@
 import numpy as np
 
 
-'''
-Input a: list or numpy array. Need the same size of b.
-Input b: list or numpy array. Need the same size of a.
-Input bins_a: Integer number. It doesn't need to be the same size as bins_b.
-Input bins_b: Integer number. It doesn't need to be the same size as bins_a.
 
-Return mutual: Real value. Mutual information between a discretized version of a (with bins_a) and b (with bins_b).
-Return joint: Real value. Joint information of a discretized version of a (with bins_a) and b (with bins_b).
-Return infa: Real value. Information of a discretized version of a (with bins_a).
-Return infb: Real value. Information of a discretized version of a (with bins_a).
-
-'''
 class InformationAnalysis:
-    
+    '''
+    Input a: list or numpy array. Need the same size of b.
+    Input b: list or numpy array. Need the same size of a.
+    Input bins_a: Integer number. It doesn't need to be the same size as bins_b.
+    Input bins_b: Integer number. It doesn't need to be the same size as bins_a.
+
+    Return mutual: Real value. Mutual information between a discretized version of a (with bins_a) and b (with bins_b).
+    Return joint: Real value. Joint information of a discretized version of a (with bins_a) and b (with bins_b).
+    Return infa: Real value. Information of a discretized version of a (with bins_a).
+    Return infb: Real value. Information of a discretized version of a (with bins_a).
+
+    '''
     def __init__(self, *args):
         self.bins_a=0;
         self.bins_b=0;
