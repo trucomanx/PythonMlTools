@@ -28,12 +28,16 @@ def all_against_all_mutual_inf(X,bins=10,bandwidth=0.08,kernel_type='gaussian'):
             # Primer vector normalizado
             Xn=X[:,n];
             Xn=Xn-np.sum(Xn);
-            Xn=Xn/np.std(Xn);
+            STD=np.std(Xn);
+            if(STD!=0)
+            Xn=Xn/STD;
             
             # Segundo vector normalizado
             Xm=X[:,m];
             Xm=Xm-np.sum(Xm);
-            Xm=Xm/np.std(Xm);
+            STD=np.std(Xm);
+            if(STD!=0)
+            Xm=Xm/STD;
             
             xx=np.concatenate((np.reshape(Xn,(L,1)),np.reshape(Xm,(L,1))), axis=1)
             kde = KernelDensity(kernel=kernel_type, bandwidth=bandwidth).fit(xx);
