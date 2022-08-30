@@ -37,4 +37,4 @@ def all_against_all_mutual_inf(X,bins=10,bandwidth=0.05,kernel_type='gaussian'):
             joint=InfA.JointEntropy();
 
             mat[n][m]=mutual/joint;
-  return mat;
+    return mat;
