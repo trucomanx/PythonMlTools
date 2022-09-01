@@ -62,6 +62,7 @@ def FuncPlotData(   krr_opt,
     print("R^2 val  :", R2_val)
     print("R^2 test :", R2_test)
 
+    '''
     plot.figure(figsize=(6, 5));
     plot.scatter(std_y*y_train+mean_y,std_y*krr_opt.predict(X_train)+mean_y);
     plot.xlabel('train');
@@ -73,9 +74,12 @@ def FuncPlotData(   krr_opt,
     plot.xlabel('val');
     plot.ylabel('predict');
     plot.title('R^2 (val): '+str(R2_val))
+    '''
     
     plot.figure(figsize=(6, 5));
     plot.scatter(std_y*y_test+mean_y,std_y*krr_opt.predict(X_test)+mean_y);
     plot.xlabel('test');
     plot.ylabel('predict');
     plot.title('R^2 (test): '+str(R2_test))
+    
+    plt.show()
