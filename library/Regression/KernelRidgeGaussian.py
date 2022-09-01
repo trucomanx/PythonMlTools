@@ -2,7 +2,7 @@
 from sklearn.kernel_ridge import KernelRidge
 import numpy as np
 
-def FuncKernelRidgeBestGaussian(alpha_list,gamma_list,X_train, y_train,X_val, y_val,verbose=False):
+def FuncKernelRidgeBestGaussian(alpha_list,gamma_list,X_train, y_train,X_val, y_val,verbose=True):
     found=False; k=0; 
     for alpha in alpha_list:
         score_val=[];
