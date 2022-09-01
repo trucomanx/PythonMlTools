@@ -82,4 +82,4 @@ def FuncPlotData(   krr_opt,
     plot.ylabel('predict');
     plot.title('R^2 (test): '+str(R2_test))
     
-    plt.show()
+    plot.show()
