@@ -2,7 +2,7 @@
 from sklearn.kernel_ridge import KernelRidge
 import numpy as np
 
-def FuncKernelRidgeBestGaussian(alpha_list,gamma_list,X_train, y_train,X_val, y_val):
+def FuncKernelRidgeBestGaussian(alpha_list,gamma_list,X_train, y_train,X_val, y_val,verbose=False):
     found=False; k=0; 
     for alpha in alpha_list:
         score_val=[];
@@ -25,12 +25,17 @@ def FuncKernelRidgeBestGaussian(alpha_list,gamma_list,X_train, y_train,X_val, y_
                     gamma_opt=gamma;
                     score_opt=sv;
                     krr_opt=krr;
-                    print("R^2 val:",sv,"\talpha:",alpha,"\tgamma:",gamma)
+                    if(verbose):
+                        print("R^2 val:",sv,"\talpha:",alpha,"\tgamma:",gamma)
+                    else:
+                        print("R^2 val:",sv,"\talpha:",alpha,"\tgamma:",gamma,"\t\t",end="\r")
                     found=True;
             k=k+1
         if(found):
             score_val_opt=score_val.copy();
             found=False
+    
+    print(" ");
     
     return krr_opt, alpha_opt, gamma_opt, score_val_opt
 
