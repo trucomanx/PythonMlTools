@@ -88,3 +88,6 @@ def FuncPlotData(   krr_opt,
     plot.title('R^2 (test): '+str(R2_test))
     
     plot.show()
+    
+    return R2_train, R2_val, R2_test;
+    
