@@ -83,5 +83,5 @@ def FuncPlotDataKfold(  krr_opt,
     
     plot.show()
     
-    return R2_train, R2_val, R2_test;
+    return R2_val, R2_test;
     
