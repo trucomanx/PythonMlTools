@@ -14,7 +14,7 @@ def FuncKernelRidgeKfoldBestGaussian(alpha_list,gamma_list,X_train, y_train,K=3,
             cv = KFold(n_splits=K, random_state=1, shuffle=True);
             #krr.fit(X_train, y_train);
             
-            scores = cross_val_score(krr, X_train, y_train), scoring='r2', cv=cv, n_jobs=-1)
+            scores = cross_val_score(krr, X_train, y_train), scoring='r2', cv=cv)
             
             #st=krr.score(X_train, y_train);
             sv=np.mean(scores);
