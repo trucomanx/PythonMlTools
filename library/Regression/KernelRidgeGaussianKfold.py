@@ -25,6 +25,7 @@ def FuncKernelRidgeKfoldBestGaussian(alpha_list,gamma_list,X_train, y_train,K=3,
                 gamma_opt=gamma;
                 score_opt=sv;
                 krr_opt=krr;
+                
                 found=True;
             else:
                 if sv>score_opt:
@@ -43,6 +44,8 @@ def FuncKernelRidgeKfoldBestGaussian(alpha_list,gamma_list,X_train, y_train,K=3,
             found=False
     
     print(" ");
+    
+    krr_opt.fit(X_train, y_train);
     
     return krr_opt, alpha_opt, gamma_opt, score_val_opt
 
