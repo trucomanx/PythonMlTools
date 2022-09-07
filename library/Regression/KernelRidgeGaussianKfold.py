@@ -18,6 +18,7 @@ def FuncKernelRidgeKfoldBestGaussian(alpha_list,gamma_list,X_train, y_train,K=3,
             
             #st=krr.score(X_train, y_train);
             sv=np.mean(scores);
+            sv_std=np.std(scores);
             
             score_val.append(sv);
             if k==0:
@@ -34,9 +35,9 @@ def FuncKernelRidgeKfoldBestGaussian(alpha_list,gamma_list,X_train, y_train,K=3,
                     score_opt=sv;
                     krr_opt=krr;
                     if(verbose):
-                        print("R^2 val:",sv,"\talpha:",alpha,"\tgamma:",gamma)
+                        print("R^2 val:",sv," (",sv_std,")","\talpha:",alpha,"\tgamma:",gamma)
                     else:
-                        print("R^2 val:",sv,"\talpha:",alpha,"\tgamma:",gamma,"\t\t",end="\r")
+                        print("R^2 val:",sv," (",sv_std,")","\talpha:",alpha,"\tgamma:",gamma,"\t\t",end="\r")
                     found=True;
             k=k+1
         if(found):
