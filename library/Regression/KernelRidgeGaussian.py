@@ -1,6 +1,7 @@
 # Kernel ridge regression
 from sklearn.kernel_ridge import KernelRidge
 import numpy as np
+from sklearn.metrics import mean_absolute_percentage_error
 
 def FuncKernelRidgeBestGaussian(alpha_list,gamma_list,X_train, y_train,X_val, y_val,verbose=True):
     found=False; k=0; 
@@ -81,13 +82,18 @@ def FuncPlotData(   krr_opt,
     plot.title('R^2 (val): '+str(R2_val))
     '''
     
+    Ypred=std_y*krr_opt.predict(X_test)+mean_y;
+    Yreal=std_y*y_test+mean_y;
+    
     plot.figure(figsize=(6, 5));
-    plot.scatter(std_y*y_test+mean_y,std_y*krr_opt.predict(X_test)+mean_y);
+    plot.scatter(Yreal,Ypred);
     plot.xlabel('test');
     plot.ylabel('predict');
     plot.title('R^2 (test): '+str(R2_test))
     
     plot.show()
+    
+    print("MAPE:\t",mean_absolute_percentage_error(Yreal,Ypred))
     
     return R2_train, R2_val, R2_test;
     

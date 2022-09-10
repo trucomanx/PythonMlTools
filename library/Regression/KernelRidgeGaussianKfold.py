@@ -2,6 +2,7 @@
 from sklearn.kernel_ridge import KernelRidge
 from sklearn.model_selection import cross_val_score
 from sklearn.model_selection import KFold
+from sklearn.metrics import mean_absolute_percentage_error
 
 import numpy as np
 
@@ -77,13 +78,18 @@ def FuncPlotDataKfold(  krr_opt,
     print("R^2 val  :", R2_val)
     print("R^2 test :", R2_test)
     
+    Ypred=std_y*krr_opt.predict(X_test)+mean_y;
+    Yreal=std_y*y_test+mean_y;
+    
     plot.figure(figsize=(6, 5));
-    plot.scatter(std_y*y_test+mean_y,std_y*krr_opt.predict(X_test)+mean_y);
+    plot.scatter(Yreal,Ypred);
     plot.xlabel('test');
     plot.ylabel('predict');
     plot.title('R^2 (test): '+str(R2_test))
     
     plot.show()
+    
+    print("MAPE:\t",mean_absolute_percentage_error(Yreal,Ypred))
     
     return R2_val, R2_test;
     
