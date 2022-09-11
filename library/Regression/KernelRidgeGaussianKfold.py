@@ -3,12 +3,13 @@ from sklearn.kernel_ridge import KernelRidge
 from sklearn.model_selection import cross_val_score
 from sklearn.model_selection import KFold
 from sklearn.metrics import mean_absolute_percentage_error
-
+from tqdm import tqdm
 import numpy as np
 
 def FuncKernelRidgeKfoldBestGaussian(alpha_list,gamma_list,X_train, y_train,K=3,verbose=True):
     found=False; k=0; 
-    for alpha in alpha_list:
+    for j in tqdm(range(np.size(alpha_list))):
+        alpha=alpha_list[j]
         score_val=[];
         for gamma in gamma_list:
             krr = KernelRidge(alpha=alpha,kernel="rbf",gamma=gamma);
