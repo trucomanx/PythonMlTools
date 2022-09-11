@@ -2,11 +2,11 @@
 from sklearn.kernel_ridge import KernelRidge
 import numpy as np
 from sklearn.metrics import mean_absolute_percentage_error
-from tqdm import tqdm
+from tqdm import tqdm, trange
 
 def FuncKernelRidgeBestGaussian(alpha_list,gamma_list,X_train, y_train,X_val, y_val,verbose=True):
     found=False; k=0; 
-    for j in tqdm(range(np.size(alpha_list))):
+    for j in trange(np.size(alpha_list)):
         alpha=alpha_list[j]
         score_val=[];
         for gamma in gamma_list:
