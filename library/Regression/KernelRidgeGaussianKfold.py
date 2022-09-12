@@ -37,7 +37,14 @@ def FuncKernelRidgeKfoldBestGaussian(alpha_list,gamma_list,X_train, y_train,K=3,
                     gamma_opt=gamma;
                     score_opt=sv;
                     krr_opt=krr;
-                    pbar.set_description("R^2 val:"+str(sv)+" ("+str(sv_std)+")\talpha:"+str(alpha)+"\tgamma:"+str(gamma));
+                    
+                    cad="";
+                    cad=cad+"R^2 val: %.3f" % sv;
+                    cad=cad+" (%.3f)" % sv_std;
+                    cad=cad+"\talpha:%.3f" % alpha;
+                    cad=cad+"\tgamma:%.3f" % gamma;
+                    pbar.set_description(cad);
+                    #pbar.set_description("R^2 val:"+str(sv)+" ("+str(sv_std)+")\talpha:"+str(alpha)+"\tgamma:"+str(gamma));
                     if(verbose):
                         print("R^2 val:",sv," (",sv_std,")","\talpha:",alpha,"\tgamma:",gamma)
                     else:
