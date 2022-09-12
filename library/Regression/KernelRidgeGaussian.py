@@ -6,7 +6,8 @@ from tqdm.notebook import tqdm
 
 def FuncKernelRidgeBestGaussian(alpha_list,gamma_list,X_train, y_train,X_val, y_val,verbose=True):
     found=False; k=0; 
-    for j in tqdm(range(np.size(alpha_list))):
+    pbar=tqdm(range(np.size(alpha_list)));
+    for j in pbar:
         alpha=alpha_list[j]
         score_val=[];
         for gamma in gamma_list:
@@ -28,6 +29,7 @@ def FuncKernelRidgeBestGaussian(alpha_list,gamma_list,X_train, y_train,X_val, y_
                     gamma_opt=gamma;
                     score_opt=sv;
                     krr_opt=krr;
+                    pbar.set_description("R^2 val:"+str(sv)+" \talpha:"+str(alpha)+"\tgamma:"+str(gamma));
                     if(verbose):
                         print("R^2 val:",sv,"\talpha:",alpha,"\tgamma:",gamma)
                     else:

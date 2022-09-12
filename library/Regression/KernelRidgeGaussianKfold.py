@@ -8,7 +8,8 @@ import numpy as np
 
 def FuncKernelRidgeKfoldBestGaussian(alpha_list,gamma_list,X_train, y_train,K=3,verbose=True):
     found=False; k=0; 
-    for j in tqdm(range(np.size(alpha_list))):
+    pbar=tqdm(range(np.size(alpha_list)));
+    for j in pbar:
         alpha=alpha_list[j]
         score_val=[];
         for gamma in gamma_list:
@@ -36,6 +37,7 @@ def FuncKernelRidgeKfoldBestGaussian(alpha_list,gamma_list,X_train, y_train,K=3,
                     gamma_opt=gamma;
                     score_opt=sv;
                     krr_opt=krr;
+                    pbar.set_description("R^2 val:"+str(sv)+" ("+str(sv_std)+")\talpha:"+str(alpha)+"\tgamma:"+str(gamma));
                     if(verbose):
                         print("R^2 val:",sv," (",sv_std,")","\talpha:",alpha,"\tgamma:",gamma)
                     else:
