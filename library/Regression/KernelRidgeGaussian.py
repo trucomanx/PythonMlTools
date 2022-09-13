@@ -4,7 +4,7 @@ import numpy as np
 from sklearn.metrics import mean_absolute_percentage_error
 from tqdm.notebook import tqdm
 
-def FuncKernelRidgeBestGaussian(alpha_list,gamma_list,X_train, y_train,X_val, y_val,verbose=True):
+def FuncKernelRidgeBestGaussian(alpha_list,gamma_list,X_train, y_train,X_val, y_val):
     found=False; k=0; 
     pbar=tqdm(range(np.size(alpha_list)));
     for j in pbar:
@@ -36,10 +36,6 @@ def FuncKernelRidgeBestGaussian(alpha_list,gamma_list,X_train, y_train,X_val, y_
                     cad=cad+"\tgamma:%.3e" % gamma;
                     pbar.set_description(cad);
                     #pbar.set_description("R^2 val:"+str(sv)+" \talpha:"+str(alpha)+"\tgamma:"+str(gamma));
-                    if(verbose):
-                        print("R^2 val:",sv,"\talpha:",alpha,"\tgamma:",gamma)
-                    else:
-                        print("R^2 val:",sv,"\talpha:",alpha,"\tgamma:",gamma,"\t\t",end="\r")
                     found=True;
             k=k+1
         if(found):
