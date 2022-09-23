@@ -2,8 +2,8 @@
 
 import numpy as np
 from sklearn.neighbors import KernelDensity
-import DensityEstimation.KdeExtras as kext
-import FeatureSelection.Metrics.FeatureInformation as FI
+import PythonMlTools.DensityEstimation.KdeExtras as kext
+import PythonMlTools.FeatureSelection.Metrics.FeatureInformation as FI
 import sys
 
 def all_against_all_mutual_inf( X,
