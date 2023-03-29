@@ -4,7 +4,7 @@ from setuptools import setup, find_packages
 
 setup(
     name   ='PythonMlTools',
-    version='0.1.0',
+    version='0.1.1',
     author='Fernando Pujaico Rivera',
     author_email='fernando.pujaico.rivera@gmail.com',
     packages=['PythonMlTools'],

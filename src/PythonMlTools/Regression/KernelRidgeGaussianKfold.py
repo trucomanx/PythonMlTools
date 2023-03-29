@@ -95,7 +95,8 @@ def FuncPlotDataKfold(  krr_opt,
     
     plot.show()
     
-    print("MAPE:\t",mean_absolute_percentage_error(Yreal,Ypred))
+    MAPE=mean_absolute_percentage_error(Yreal,Ypred);
+    print("MAPE:\t",MAPE)
     
-    return R2_val, R2_test;
+    return R2_val, R2_test, MAPE;
     
