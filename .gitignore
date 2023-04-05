@@ -8,3 +8,5 @@
 /src/PythonMlTools/FeatureSelection/Analysis/__pycache__
 /src/PythonMlTools/FeatureSelection/Metrics/__pycache__
 /src/PythonMlTools/__pycache__
+/src/dist
+/src/PythonMlTools.egg-info
