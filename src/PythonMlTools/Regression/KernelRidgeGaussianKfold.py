@@ -118,11 +118,9 @@ def FuncContourFDataKfold(  alpha_list,
     #print('     YYY.shape:',YYY.shape);
     #im=ax.pcolormesh(XXX.T, YYY.T, SCORE_AG);
     levels = np.linspace(SCORE_AG.min(), SCORE_AG.max(), nlevels);
-    im=ax.contourf(XXX.T, YYY.T, SCORE_AG,levels=levels);
+    im=ax.contourf(XXX.T, YYY.T, SCORE_AG,levels=levels,cmap=cmap_str);
     ax.set_xlabel('alpha');
     ax.set_ylabel('gamma');
     ax.set_title(title);
-    cmap = plot.get_cmap(cmap_str);
-    plot.set_cmap(cmap);
     plot.colorbar(im,label="R2", orientation="vertical") ;
     plot.show();
