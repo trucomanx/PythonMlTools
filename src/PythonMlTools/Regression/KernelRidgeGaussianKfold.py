@@ -24,7 +24,7 @@ def FuncKernelRidgeKfoldBestGaussian(alpha_list,gamma_list,X_train, y_train,K=3)
             #st=krr.score(X_train, y_train);
             sv=np.mean(scores);
             sv_std=np.std(scores);
-            SCORE_AG[j][gn]=sv;
+            SCORE_AG[j][ng]=sv;
             
             score_val.append(sv);
             if k==0:
