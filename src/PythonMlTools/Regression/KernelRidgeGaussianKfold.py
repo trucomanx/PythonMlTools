@@ -9,9 +9,11 @@ import numpy as np
 def FuncKernelRidgeKfoldBestGaussian(alpha_list,gamma_list,X_train, y_train,K=3):
     found=False; k=0; 
     pbar=tqdm(range(np.size(alpha_list)));
+    SCORE_AG=np.zeros((np.size(alpha_list),np.size(gamma_list)))
     for j in pbar:
         alpha=alpha_list[j]
         score_val=[];
+        ng=0;
         for gamma in gamma_list:
             krr = KernelRidge(alpha=alpha,kernel="rbf",gamma=gamma);
             cv = KFold(n_splits=K, random_state=1, shuffle=True);
@@ -22,6 +24,7 @@ def FuncKernelRidgeKfoldBestGaussian(alpha_list,gamma_list,X_train, y_train,K=3)
             #st=krr.score(X_train, y_train);
             sv=np.mean(scores);
             sv_std=np.std(scores);
+            SCORE_AG[j][gn]=sv;
             
             score_val.append(sv);
             if k==0:
@@ -47,16 +50,17 @@ def FuncKernelRidgeKfoldBestGaussian(alpha_list,gamma_list,X_train, y_train,K=3)
                     #pbar.set_description("R^2 val:"+str(sv)+" ("+str(sv_std)+")\talpha:"+str(alpha)+"\tgamma:"+str(gamma));
                     found=True;
             k=k+1
+            ng=ng+1;
         if(found):
             score_val_opt=score_val.copy();
             found=False
     
     krr_opt.fit(X_train, y_train);
-    print("\nR^2 train:",krr_opt.score(X_train, y_train));
+    print("\nR^2 train+val:",krr_opt.score(X_train, y_train));
     
     #print("krr_opt:\n",krr_opt.get_params(),"\n")
     
-    return krr_opt, alpha_opt, gamma_opt, score_val_opt
+    return krr_opt, alpha_opt, gamma_opt, score_val_opt, SCORE_AG
 
 import matplotlib.pyplot as plot
 
