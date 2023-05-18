@@ -107,10 +107,12 @@ def FuncPlotDataKfold(  krr_opt,
 def FuncContourFDataKfold(  alpha_list,
                             gamma_list,
                             SSCORE_AG,
-                            nlevels=32):
+                            nlevels=32,
+                            title='',
+                            cmap_str='jet'):
     # plot
     fig, ax = plt.subplots(figsize=(12, 12));
-    XXX, YYY = np.meshgrid(DICT_HYPER[IDX]['alpha_list'], DICT_HYPER[IDX]['gamma_list'])
+    XXX, YYY = np.meshgrid(alpha_list, gamma_list)
     #print('SCORE_AG.shape:',SCORE_AG.shape);
     #print('     XXX.shape:',XXX.shape);
     #print('     YYY.shape:',YYY.shape);
@@ -119,8 +121,8 @@ def FuncContourFDataKfold(  alpha_list,
     im=ax.contourf(XXX.T, YYY.T, SCORE_AG,levels=levels);
     ax.set_xlabel('alpha');
     ax.set_ylabel('gamma');
-    ax.set_title(labels_y[IDX]);
-    cmap = plt.get_cmap('jet');
+    ax.set_title(title);
+    cmap = plt.get_cmap(cmap_str);
     plt.set_cmap(cmap);
     plt.colorbar(im,label="R2", orientation="vertical") ;
     plt.show();
