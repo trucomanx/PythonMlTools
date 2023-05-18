@@ -54,7 +54,7 @@ def FuncKernelRidgeKfoldBestGaussian(alpha_list,gamma_list,X_train, y_train,K=3)
     krr_opt.fit(X_train, y_train);
     print("\nR^2 train+val:",krr_opt.score(X_train, y_train));
     
-    print("krr_opt:\n",krr_opt.get_params(),"\n")
+    #print("krr_opt:\n",krr_opt.get_params(),"\n")
     
     return krr_opt, alpha_opt, gamma_opt, score_val_opt
 
