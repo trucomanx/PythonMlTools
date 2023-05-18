@@ -106,7 +106,7 @@ def FuncPlotDataKfold(  krr_opt,
     
 def FuncContourFDataKfold(  alpha_list,
                             gamma_list,
-                            SSCORE_AG,
+                            SCORE_AG,
                             nlevels=32,
                             title='',
                             cmap_str='jet'):
