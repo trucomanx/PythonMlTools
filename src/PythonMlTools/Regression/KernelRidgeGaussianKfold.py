@@ -104,3 +104,23 @@ def FuncPlotDataKfold(  krr_opt,
     
     return R2_val, R2_test, MAPE;
     
+def FuncContourFDataKfold(  alpha_list,
+                            gamma_list,
+                            SSCORE_AG,
+                            nlevels=32):
+    # plot
+    fig, ax = plt.subplots(figsize=(12, 12));
+    XXX, YYY = np.meshgrid(DICT_HYPER[IDX]['alpha_list'], DICT_HYPER[IDX]['gamma_list'])
+    #print('SCORE_AG.shape:',SCORE_AG.shape);
+    #print('     XXX.shape:',XXX.shape);
+    #print('     YYY.shape:',YYY.shape);
+    #im=ax.pcolormesh(XXX.T, YYY.T, SCORE_AG);
+    levels = np.linspace(SCORE_AG.min(), SCORE_AG.max(), nlevels);
+    im=ax.contourf(XXX.T, YYY.T, SCORE_AG,levels=levels);
+    ax.set_xlabel('alpha');
+    ax.set_ylabel('gamma');
+    ax.set_title(labels_y[IDX]);
+    cmap = plt.get_cmap('jet');
+    plt.set_cmap(cmap);
+    plt.colorbar(im,label="R2", orientation="vertical") ;
+    plt.show();
