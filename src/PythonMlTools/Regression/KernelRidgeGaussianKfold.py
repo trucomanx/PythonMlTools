@@ -122,7 +122,7 @@ def FuncContourFDataKfold(  alpha_list,
     ax.set_xlabel('alpha');
     ax.set_ylabel('gamma');
     ax.set_title(title);
-    cmap = plt.get_cmap(cmap_str);
+    cmap = plot.get_cmap(cmap_str);
     plot.set_cmap(cmap);
     plot.colorbar(im,label="R2", orientation="vertical") ;
     plot.show();
