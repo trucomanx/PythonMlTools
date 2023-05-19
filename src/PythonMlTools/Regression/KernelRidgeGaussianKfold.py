@@ -97,7 +97,7 @@ def FuncPlotDataKfold(  krr_opt,
     MAX=np.max([Ypred.max(),Yreal.max()]);
     plot.xlim(MIN,MAX);
     plot.ylim(MIN,MAX);
-    plot.xlabel('test');
+    plot.xlabel('real');
     plot.ylabel('predict');
     plot.title('R^2 (test): '+str(R2_test))
     
