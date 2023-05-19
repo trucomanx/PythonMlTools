@@ -93,6 +93,10 @@ def FuncPlotDataKfold(  krr_opt,
     
     plot.figure(figsize=(6, 5));
     plot.scatter(Yreal,Ypred);
+    MIN=np.min([Ypred.min(),Yreal.min()]); 
+    MAX=np.max([Ypred.max(),Yreal.max()]);
+    plot.xlim(MIN,MAX);
+    plot.ylim(MIN,MAX);
     plot.xlabel('test');
     plot.ylabel('predict');
     plot.title('R^2 (test): '+str(R2_test))
