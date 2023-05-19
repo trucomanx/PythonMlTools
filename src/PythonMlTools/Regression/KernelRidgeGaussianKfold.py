@@ -108,7 +108,7 @@ def FuncPlotDataKfold(  krr_opt,
     
     return R2_val, R2_test, MAPE;
     
-def FuncContourFDataKfold(  alpha_list,
+def FuncContourFKrrDataKfold(  alpha_list,
                             gamma_list,
                             SCORE_AG,
                             nlevels=32,
@@ -127,4 +127,21 @@ def FuncContourFDataKfold(  alpha_list,
     ax.set_ylabel('gamma');
     ax.set_title(title);
     plot.colorbar(im,label="R2", orientation="vertical") ;
+    plot.show();
+
+def FuncSurfaceKrrDataKfold(alpha_list,
+                            gamma_list,
+                            SCORE_AG,
+                            title='',
+                            cmap_str='jet'):
+    XXX, YYY = np.meshgrid(alpha_list, gamma_list);
+    # plot
+    fig = plot.figure(figsize=(12, 12));
+    ax = plot.axes(projection='3d');
+    ax.plot_surface(XXX.T, YYY.T, SCORE_AG, rstride=1, cstride=1, cmap=cmap_str, edgecolor='none');
+    ax.set_xlabel('alpha');
+    ax.set_ylabel('gamma');
+    ax.set_zlabel('R2');
+    ax.set_title(title);
+    #ax.view_init(60, 35);
     plot.show();
