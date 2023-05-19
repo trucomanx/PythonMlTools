@@ -138,7 +138,12 @@ def FuncSurfaceKrrDataKfold(alpha_list,
     # plot
     fig = plot.figure(figsize=(12, 12));
     ax = plot.axes(projection='3d');
-    ax.plot_surface(XXX.T, YYY.T, SCORE_AG, rstride=1, cstride=1, cmap=cmap_str, edgecolor='none');
+    ax.plot_surface(XXX.T, YYY.T, 
+                    SCORE_AG, 
+                    rstride=1, 
+                    cstride=1, 
+                    cmap=cmap_str#, edgecolor='none'
+                   );
     ax.set_xlabel('alpha');
     ax.set_ylabel('gamma');
     ax.set_zlabel('R2');
