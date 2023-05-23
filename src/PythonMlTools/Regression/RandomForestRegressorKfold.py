@@ -119,7 +119,7 @@ def FuncPlotDataKfold(  rfr_opt,
     
     return R2_val, R2_test, MAPE;
     
-def FuncContourFKrrDataKfold(  param1_list,
+def FuncContourFRfrDataKfold(  param1_list,
                             param2_list,
                             SCORE_P1P2,
                             nlevels=32,
@@ -140,7 +140,7 @@ def FuncContourFKrrDataKfold(  param1_list,
     plot.colorbar(im,label="R2", orientation="vertical") ;
     plot.show();
 
-def FuncSurfaceKrrDataKfold(param1_list,
+def FuncSurfaceRfrDataKfold(param1_list,
                             param2_list,
                             SCORE_P1P2,
                             title='',
