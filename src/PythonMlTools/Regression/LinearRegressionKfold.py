@@ -46,7 +46,7 @@ def FuncPlotDataKfold(  lr_opt,
     Yfake=lr_tt.predict(Ypred);
     
     plot.figure(figsize=(6, 5));
-    plot.scatter(Ypred,Yreal);
+    plot.scatter(Ypred.reshape(-1,1),Yreal);
     plot.plot(Ypred,Yfake,label=np.array2string(lr_tt.coef_)+'Ypred+'+str(lr_tt.intercept_));
     
     MIN=np.min([Ypred.min(),Yreal.min()]); 
