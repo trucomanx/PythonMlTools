@@ -48,7 +48,7 @@ def FuncPlotDataKfold(  lr_opt,
     plot.figure(figsize=(6, 5));
     plot.scatter(Yreal,Ypred,label='(real,predict)');
     plot.plot(Yreal,Yfake,label=np.array2string(lr_tt.coef_)+'Ypred+'+str(lr_tt.intercept_));
-    plt.legend()
+    plot.legend()
     
     MIN=np.min([Ypred.min(),Yreal.min()]); 
     MAX=np.max([Ypred.max(),Yreal.max()]);
