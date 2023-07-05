@@ -42,11 +42,11 @@ def FuncPlotDataKfold(  lr_opt,
     Yreal=std_y*y_test+mean_y;
     
     lr_tt = LinearRegression();
-    lr_tt.fit(Ypred,Yreal);
+    lr_tt.fit(Ypred.reshape(-1,1),Yreal);
     Yfake=lr_tt.predict(Ypred);
     
     plot.figure(figsize=(6, 5));
-    plot.scatter(Yreal,Ypred);
+    plot.scatter(Ypred,Yreal);
     plot.plot(Ypred,Yfake,label=np.array2string(lr_tt.coef_)+'Ypred+'+str(lr_tt.intercept_));
     
     MIN=np.min([Ypred.min(),Yreal.min()]); 
