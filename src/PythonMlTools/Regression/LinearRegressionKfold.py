@@ -29,7 +29,8 @@ import matplotlib.pyplot as plot
 def FuncPlotDataKfold(  lr_opt, 
                         R2_val,
                         mean_y,std_y,
-                        X_test, y_test):
+                        X_test, y_test,
+                        Line=True):
     plot.figure(figsize=(6, 5))
     
     R2_test=lr_opt.score(X_test, y_test);
@@ -41,14 +42,14 @@ def FuncPlotDataKfold(  lr_opt,
     Ypred=std_y*lr_opt.predict(X_test)+mean_y;
     Yreal=std_y*y_test+mean_y;
     
-    lr_tt = LinearRegression();
-    lr_tt.fit(Yreal.reshape(-1,1),Ypred);
-    Yfake=lr_tt.predict(Yreal.reshape(-1,1));
-    
     plot.figure(figsize=(6, 5));
     plot.scatter(Yreal,Ypred,label='(real,predict)');
-    plot.plot(Yreal,Yfake,label='{0:.3f}'.format(lr_tt.coef_[0])+'Yreal+'+'{0:.3f}'.format(lr_tt.intercept_) );
-    plot.legend()
+    if Line:
+        lr_tt = LinearRegression();
+        lr_tt.fit(Yreal.reshape(-1,1),Ypred);
+        Yfake=lr_tt.predict(Yreal.reshape(-1,1));
+        plot.plot(Yreal,Yfake,label='{0:.3f}'.format(lr_tt.coef_[0])+'Yreal+'+'{0:.3f}'.format(lr_tt.intercept_) );
+        plot.legend()
     
     MIN=np.min([Ypred.min(),Yreal.min()]); 
     MAX=np.max([Ypred.max(),Yreal.max()]);

@@ -81,7 +81,8 @@ def FuncPlotDataKfold(  rfr_opt,
                         score_val_opt,
                         mean_y,std_y,
                         max_depth_list,
-                        X_test, y_test):
+                        X_test, y_test,
+                        Line=True):
     plot.figure(figsize=(6, 5))
     plot.plot(max_depth_list, score_val_opt);
     plot.xlabel('max_depth.');
@@ -104,6 +105,12 @@ def FuncPlotDataKfold(  rfr_opt,
     
     plot.figure(figsize=(6, 5));
     plot.scatter(Yreal,Ypred);
+    if Line:
+        lr_tt = LinearRegression();
+        lr_tt.fit(Yreal.reshape(-1,1),Ypred);
+        Yfake=lr_tt.predict(Yreal.reshape(-1,1));
+        plot.plot(Yreal,Yfake,label='{0:.3f}'.format(lr_tt.coef_[0])+'Yreal+'+'{0:.3f}'.format(lr_tt.intercept_) );
+        plot.legend()
     MIN=np.min([Ypred.min(),Yreal.min()]); 
     MAX=np.max([Ypred.max(),Yreal.max()]);
     plot.xlim(MIN,MAX);
