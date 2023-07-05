@@ -24,6 +24,7 @@ def FuncLinearRegressionKfoldBest(X_train, y_train,K=3):
     return lr, sv, sv_std
 
 
+import matplotlib.pyplot as plot
 
 def FuncPlotDataKfold(  lr_opt, 
                         R2_val,
