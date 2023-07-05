@@ -18,8 +18,8 @@ def FuncLinearRegressionKfoldBest(X_train, y_train,K=3):
     sv=np.mean(scores);
     sv_std=np.std(scores);
     
-    lr_opt.fit(X_train, y_train);
-    print("\nR^2 train+val:",lr_opt.score(X_train, y_train));
+    lr.fit(X_train, y_train);
+    print("\nR^2 train+val:",lr.score(X_train, y_train));
     
-    return lr_opt, sv, sv_std
+    return lr, sv, sv_std
 
