@@ -1,4 +1,5 @@
 # Kernel ridge regression
+from sklearn.linear_model import LinearRegression
 from sklearn.ensemble import RandomForestRegressor
 from sklearn.model_selection import cross_val_score
 from sklearn.model_selection import KFold
