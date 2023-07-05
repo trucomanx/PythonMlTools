@@ -41,8 +41,14 @@ def FuncPlotDataKfold(  lr_opt,
     Ypred=std_y*lr_opt.predict(X_test)+mean_y;
     Yreal=std_y*y_test+mean_y;
     
+    lr_tt = LinearRegression();
+    lr_tt.fit(Ypred,Yreal);
+    Yfake=lr_tt.predict(Ypred);
+    
     plot.figure(figsize=(6, 5));
     plot.scatter(Yreal,Ypred);
+    plot.plot(Ypred,Yfake,label=str(lr_tt.coef_[0])'Ypred+'+str(lr_tt.intercept_));
+    
     MIN=np.min([Ypred.min(),Yreal.min()]); 
     MAX=np.max([Ypred.max(),Yreal.max()]);
     plot.xlim(MIN,MAX);
