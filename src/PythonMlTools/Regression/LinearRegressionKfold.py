@@ -23,3 +23,37 @@ def FuncLinearRegressionKfoldBest(X_train, y_train,K=3):
     
     return lr, sv, sv_std
 
+
+
+def FuncPlotDataKfold(  lr_opt, 
+                        R2_val,
+                        mean_y,std_y,
+                        X_test, y_test):
+    plot.figure(figsize=(6, 5))
+    
+    R2_test=lr_opt.score(X_test, y_test);
+    print("R^2 is the coefficient of determination of the prediction. <-infty,1.0]")
+    
+    print("R^2 val  :", R2_val)
+    print("R^2 test :", R2_test)
+    
+    Ypred=std_y*lr_opt.predict(X_test)+mean_y;
+    Yreal=std_y*y_test+mean_y;
+    
+    plot.figure(figsize=(6, 5));
+    plot.scatter(Yreal,Ypred);
+    MIN=np.min([Ypred.min(),Yreal.min()]); 
+    MAX=np.max([Ypred.max(),Yreal.max()]);
+    plot.xlim(MIN,MAX);
+    plot.ylim(MIN,MAX);
+    plot.xlabel('real');
+    plot.ylabel('predict');
+    plot.title('R^2 (test): '+str(R2_test))
+    
+    plot.show()
+    
+    MAPE=mean_absolute_percentage_error(Yreal,Ypred);
+    print("MAPE:\t",MAPE)
+    
+    return R2_val, R2_test, MAPE;
+    
