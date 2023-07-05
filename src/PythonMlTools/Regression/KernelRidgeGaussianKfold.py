@@ -1,4 +1,5 @@
-# Kernel ridge regression
+# Kernel ridge regression]
+from sklearn.linear_model import LinearRegression
 from sklearn.kernel_ridge import KernelRidge
 from sklearn.model_selection import cross_val_score
 from sklearn.model_selection import KFold
@@ -91,8 +92,15 @@ def FuncPlotDataKfold(  krr_opt,
     Ypred=std_y*krr_opt.predict(X_test)+mean_y;
     Yreal=std_y*y_test+mean_y;
     
+    lr_tt = LinearRegression();
+    lr_tt.fit(Yreal.reshape(-1,1),Ypred);
+    Yfake=lr_tt.predict(Yreal.reshape(-1,1));
+    
     plot.figure(figsize=(6, 5));
-    plot.scatter(Yreal,Ypred);
+    plot.scatter(Yreal,Ypred,label='(real,predict)');
+    plot.plot(Yreal,Yfake,label=np.array2string(lr_tt.coef_)+'Yreal+'+str(lr_tt.intercept_));
+    plot.legend()
+    
     MIN=np.min([Ypred.min(),Yreal.min()]); 
     MAX=np.max([Ypred.max(),Yreal.max()]);
     plot.xlim(MIN,MAX);
