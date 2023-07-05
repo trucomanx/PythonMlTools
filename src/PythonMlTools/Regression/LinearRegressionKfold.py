@@ -42,12 +42,13 @@ def FuncPlotDataKfold(  lr_opt,
     Yreal=std_y*y_test+mean_y;
     
     lr_tt = LinearRegression();
-    lr_tt.fit(Ypred.reshape(-1,1),Yreal);
-    Yfake=lr_tt.predict(Ypred.reshape(-1,1));
+    lr_tt.fit(Yreal.reshape(-1,1),Ypred);
+    Yfake=lr_tt.predict(Yreal.reshape(-1,1));
     
     plot.figure(figsize=(6, 5));
-    plot.scatter(Ypred,Yreal);
-    plot.plot(Ypred,Yfake,label=np.array2string(lr_tt.coef_)+'Ypred+'+str(lr_tt.intercept_));
+    plot.scatter(Yreal,Ypred,label='(real,predict)');
+    plot.plot(Yreal,Yfake,label=np.array2string(lr_tt.coef_)+'Ypred+'+str(lr_tt.intercept_));
+    plt.legend()
     
     MIN=np.min([Ypred.min(),Yreal.min()]); 
     MAX=np.max([Ypred.max(),Yreal.max()]);
