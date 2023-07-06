@@ -2,6 +2,7 @@
 import sys
 import seaborn as sns
 import matplotlib.pyplot as plt
+import numpy as np
 
 def plot_mat_xy(  MAT_XY,
                   labels_x=None,
