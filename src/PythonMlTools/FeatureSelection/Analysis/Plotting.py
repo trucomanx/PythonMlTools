@@ -40,7 +40,12 @@ def plot_mat_xy(  MAT_XY,
         pass;
     plt.show();
 
-def plot_corrcoef_x(X_in,labels_x=None,title='',figsize=15,img_filepath=None,cmap='jet'):
+def plot_corrcoef_x(X_in,
+                    labels_x=None,
+                    title='',
+                    figsize=15,
+                    img_filepath=None,
+                    cmap='jet'):
     if len(X_in.shape)==1:
         Nx=1;
     else:
@@ -57,7 +62,16 @@ def plot_corrcoef_x(X_in,labels_x=None,title='',figsize=15,img_filepath=None,cma
                   img_filepath=img_filepath,
                   cmap=cmap);
 
-def plot_corrcoef_xy(X_in,Y_in,labels_x=None,labels_y=None,title='',figxsize=15,figysize=2,img_filepath=None,cmap='jet'):
+def plot_corrcoef_xy(   X_in,
+                        Y_in,
+                        labels_x=None,
+                        labels_y=None,
+                        title='',
+                        figxsize=15,
+                        figysize=2,
+                        img_filepath=None,
+                        cmap='jet',
+                        horizontal=False):
     if len(X_in.shape)==1:
         Nx=1;
     else:
@@ -80,12 +94,22 @@ def plot_corrcoef_xy(X_in,Y_in,labels_x=None,labels_y=None,title='',figxsize=15,
         for n in range(Ny):
             corr=np.abs(np.corrcoef(X[:,m],Y[:,n]))[0,1]
             CORR_XY[m,n]=corr;
-
-    plot_mat_xy(  CORR_XY,
-                  labels_x=labels_x,
-                  labels_y=labels_y,
-                  title=title,
-                  figxsize=figxsize,
-                  figysize=figysize,
-                  img_filepath=img_filepath,
-                  cmap=cmap);
+    
+    if horizontal:
+        plot_mat_xy(  CORR_XY.T,
+                      labels_x=labels_y,
+                      labels_y=labels_x,
+                      title=title,
+                      figxsize=figysize,
+                      figysize=figxsize,
+                      img_filepath=img_filepath,
+                      cmap=cmap);
+    else:
+        plot_mat_xy(  CORR_XY,
+                      labels_x=labels_x,
+                      labels_y=labels_y,
+                      title=title,
+                      figxsize=figxsize,
+                      figysize=figysize,
+                      img_filepath=img_filepath,
+                      cmap=cmap);
