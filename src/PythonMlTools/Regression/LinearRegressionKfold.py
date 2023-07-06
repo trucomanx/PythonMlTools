@@ -25,6 +25,7 @@ def FuncLinearRegressionKfoldBest(X_train, y_train,K=3):
 
 
 import matplotlib.pyplot as plot
+from scipy.stats import pearsonr
 
 def FuncPlotDataKfold(  lr_opt, 
                         R2_val,
@@ -63,6 +64,8 @@ def FuncPlotDataKfold(  lr_opt,
     
     MAPE=mean_absolute_percentage_error(Yreal,Ypred);
     print("MAPE:\t",MAPE)
+    corr, _ = pearsonr(Yreal,Ypred)
+    print('Pearsons correlation: %.3f' % corr)
     
     return R2_val, R2_test, MAPE;
     
