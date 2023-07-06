@@ -53,7 +53,9 @@ def plot_corrcoef_x(X_in,
     
     X=X_in.reshape((-1,Nx));
     
-    plot_mat_xy(  np.corrcoef(X.T),
+    MAT_X=np.corrcoef(X.T);
+    
+    plot_mat_xy(  MAT_X,
                   labels_x=labels_x,
                   labels_y=labels_x,
                   title=title,
@@ -61,6 +63,7 @@ def plot_corrcoef_x(X_in,
                   figysize=figsize,
                   img_filepath=img_filepath,
                   cmap=cmap);
+    return MAT_X;
 
 def plot_corrcoef_xy(   X_in,
                         Y_in,
@@ -113,3 +116,4 @@ def plot_corrcoef_xy(   X_in,
                       figysize=figysize,
                       img_filepath=img_filepath,
                       cmap=cmap);
+    return CORR_XY;
