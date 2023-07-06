@@ -75,6 +75,7 @@ def FuncRandomForestRegressorKfold( n_estimators_list,
     return rfr_opt, n_estimators_opt, max_depth_opt, score_val_opt, SCORE_P1P2
 
 import matplotlib.pyplot as plot
+from scipy.stats import pearsonr
 
 def FuncPlotDataKfold(  rfr_opt, 
                         n_estimators_opt, 
@@ -124,6 +125,8 @@ def FuncPlotDataKfold(  rfr_opt,
     
     MAPE=mean_absolute_percentage_error(Yreal,Ypred);
     print("MAPE:\t",MAPE)
+    corr, _ = pearsonr(Yreal,Ypred)
+    print('Pearsons correlation: %.3f' % corr)
     
     return R2_val, R2_test, MAPE;
     

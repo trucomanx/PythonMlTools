@@ -64,6 +64,7 @@ def FuncSVRKfoldBestGaussian(epsilon_list,gamma_list,X_train, y_train,K=3):
     return krr_opt, epsilon_opt, gamma_opt, score_val_opt, SCORE_EG
 
 import matplotlib.pyplot as plot
+from scipy.stats import pearsonr
 
 def FuncPlotDataKfold(  krr_opt, 
                         epsilon_opt, 
@@ -113,6 +114,8 @@ def FuncPlotDataKfold(  krr_opt,
     
     MAPE=mean_absolute_percentage_error(Yreal,Ypred);
     print("MAPE:\t",MAPE)
+    corr, _ = pearsonr(Yreal,Ypred)
+    print('Pearsons correlation: %.3f' % corr)
     
     return R2_val, R2_test, MAPE;
     
