@@ -117,3 +117,57 @@ def plot_corrcoef_xy(   X_in,
                       img_filepath=img_filepath,
                       cmap=cmap);
     return CORR_XY;
+    
+from sklearn.feature_selection import mutual_info_regression
+
+
+def plot_mutual_information_xy( X_in,
+                                Y_in,
+                                labels_x=None,
+                                labels_y=None,
+                                title='',
+                                figxsize=15,
+                                figysize=2,
+                                img_filepath=None,
+                                cmap='jet',
+                                horizontal=False):
+    if len(X_in.shape)==1:
+        Nx=1;
+    else:
+        Nx=X_in.shape[1];
+    
+    if len(Y_in.shape)==1:
+        Ny=1;
+    else:
+        Ny=Y_in.shape[1];
+    X=X_in.reshape((-1,Nx));
+    Y=Y_in.reshape((-1,Ny));
+
+    if X.shape[0]!=Y.shape[0]:
+        sys.exit('Problem with shapes: X_in.shape[0]!=Y_in.shape[0]')
+    L =X.shape[0];
+
+    MI_XY=np.zeros((Nx,Ny))
+
+    for n in range(Ny):
+        MI_XY[:,n]=mutual_info_regression(X, Y[:,n]);
+    
+    if horizontal:
+        plot_mat_xy(  MI_XY.T,
+                      labels_x=labels_y,
+                      labels_y=labels_x,
+                      title=title,
+                      figxsize=figysize,
+                      figysize=figxsize,
+                      img_filepath=img_filepath,
+                      cmap=cmap);
+    else:
+        plot_mat_xy(  MI_XY,
+                      labels_x=labels_x,
+                      labels_y=labels_y,
+                      title=title,
+                      figxsize=figxsize,
+                      figysize=figysize,
+                      img_filepath=img_filepath,
+                      cmap=cmap);
+    return MI_XY;
