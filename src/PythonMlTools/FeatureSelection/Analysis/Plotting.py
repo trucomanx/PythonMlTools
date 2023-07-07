@@ -203,9 +203,8 @@ def plot_sorted_mutual_info_bins_xy(    X_in,
     DATA_COLUMNS_SORTED_m = [a for _,a in Zdat];
     Data_SORTED           = [a for a,_ in Zdat];
     
-    mat_xy_SORTED_m       = np.array(Data_SORTED).T
     
-    plot_bar_vec_xy(  mat_xy_SORTED_m,
+    plot_bar_vec_xy(  Data_SORTED.tolist(),
                       labels_x=DATA_COLUMNS_SORTED_m,
                       label_y='',
                       title=title,
@@ -213,7 +212,7 @@ def plot_sorted_mutual_info_bins_xy(    X_in,
                       figysize=figysize,
                       img_filepath=img_filepath);
     
-    return mat_xy_SORTED_m;
+    return Data_SORTED;
 
 #############################################################
 from sklearn.feature_selection import mutual_info_regression
