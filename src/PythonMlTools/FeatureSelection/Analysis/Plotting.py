@@ -11,10 +11,7 @@ def plot_bar_vec_xy(  VEC_XY,
                       figxsize=15,
                       figysize=4,
                       img_filepath=None):
-
-    if len(VEC_XY.shape)!=1:
-        sys.exit('Problem with shapes: len(VEC_XY.shape)!=2 : current length = '+str(len(VEC_XY.shape)))
-
+    
     fig = plt.figure(figsize=(figysize, figxsize)) # width and height in inches
     plt.barh(labels_x, VEC_XY, edgecolor="white", linewidth=0.7)
     if isinstance(label_y,str):
