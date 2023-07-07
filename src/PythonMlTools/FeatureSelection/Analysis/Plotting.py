@@ -10,10 +10,14 @@ def plot_bar_vec_xy(  VEC_XY,
                       title='',
                       figxsize=15,
                       figysize=4,
-                      img_filepath=None):
+                      img_filepath=None,
+                      horizontal=True):
     
     fig = plt.figure(figsize=(figysize, figxsize)) # width and height in inches
-    plt.barh(labels_x, VEC_XY, edgecolor="white", linewidth=0.7)
+    if horizontal:
+        plt.barh(labels_x, VEC_XY, edgecolor="white", linewidth=0.7)
+    else:
+        plt.bar(labels_x, VEC_XY, edgecolor="white", linewidth=0.7)
     if isinstance(label_y,str):
         plt.ylabel(label_y);
     plt.title(title);
@@ -303,4 +307,51 @@ def plot_mutual_info_regression_xy( X_in,
                       cmap=cmap);
     return MI_XY;
 
+def plot_mutual_info_regression_xy_vector(  X_in,
+                                            y_in,
+                                            labels_x=None,
+                                            title='',
+                                            figxsize=15,
+                                            figysize=2,
+                                            img_filepath=None,
+                                            horizontal=False):
+    if len(X_in.shape)==1:
+        Nx=1;
+    else:
+        Nx=X_in.shape[1];
+    
+    if len(y_in.shape)!=1:
+        sys.exit('Problem with shape. len(y_in.shape)!=1');
+    
+    X=X_in.reshape((-1,Nx));
+    y=y_in.reshape((-1,1));
 
+    if X.shape[0]!=y.shape[0]:
+        sys.exit('Problem with shapes: X_in.shape[0]!=y_in.shape[0]')
+    L =X.shape[0];
+    
+    MAX=mutual_info_regression(y.reshape((-1,1)), y);
+
+    mat_xy=mutual_info_regression(X, y)/MAX;
+    
+    if labels_x==None:
+        labels_x=['f'+str(n) for n in range(Nx)];
+        
+    Zdat = sorted(zip(mat_xy.tolist(),labels_x));#, reverse=True
+    
+    DATA_COLUMNS_SORTED_m = [a for _,a in Zdat];
+    Data_SORTED           = [a for a,_ in Zdat];
+    
+    mat_xy_SORTED_m       = np.array(Data_SORTED).reshape((-1,));
+    
+    
+    plot_bar_vec_xy(  mat_xy_SORTED_m,
+                      labels_x=DATA_COLUMNS_SORTED_m,
+                      label_y='',
+                      title=title,
+                      figxsize=figxsize,
+                      figysize=figysize,
+                      img_filepath=img_filepath,
+                      horizontal=horizontal);
+    
+    return MI_XY;
