@@ -332,7 +332,7 @@ def plot_mutual_info_regression_xy_vector(  X_in,
         sys.exit('Problem with shapes: X_in.shape[0]!=y_in.shape[0]')
     L =X.shape[0];
     
-    MAX=mutual_info_regression(y.reshape((-1,1)), y);
+    MAX=mutual_info_regression(y.reshape((-1,1)), y.reshape(-1,));
     
     #print('X.shape:',X.shape)
     #print('y.shape:',y.shape)
