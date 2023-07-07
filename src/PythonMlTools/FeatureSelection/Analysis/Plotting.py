@@ -333,7 +333,10 @@ def plot_mutual_info_regression_xy_vector(  X_in,
     L =X.shape[0];
     
     MAX=mutual_info_regression(y.reshape((-1,1)), y);
-
+    
+    print('X.shape:',X.shape)
+    print('y.shape:',y.shape)
+    
     mat_xy=mutual_info_regression(X, y)/MAX;
     
     if labels_x==None:
