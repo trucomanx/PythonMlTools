@@ -4,7 +4,28 @@ import seaborn as sns
 import matplotlib.pyplot as plt
 import numpy as np
 
+def plot_bar_vec_xy(  VEC_XY,
+                      labels_x=None,
+                      label_y='',
+                      title='',
+                      figxsize=15,
+                      figysize=4,
+                      img_filepath=None):
 
+    if len(VEC_XY.shape)!=1:
+        sys.exit('Problem with shapes: len(VEC_XY.shape)!=2 : current length = '+str(len(VEC_XY.shape)))
+
+    fig = plt.figure(figsize=(figysize, figxsize)) # width and height in inches
+    plt.barh(labels_x, VEC_XY, edgecolor="white", linewidth=0.7)
+    if isinstance(label_y,str):
+        plt.ylabel(label_y);
+    plt.title(title);
+    
+    try:
+        fig.savefig(img_filepath);
+    except:
+        pass;
+    plt.show();
 
 def plot_mat_xy(  MAT_XY,
                   labels_x=None,
@@ -156,6 +177,49 @@ def plot_mutual_info_bins_x(    X_in,
                   cmap=cmap)
     return mat_x 
 
+def plot_sorted_mutual_info_bins_xy(    X_in,
+                                        y_in,
+                                        bins,
+                                        bandwidth,#=0.8/bins,
+                                        labels_x=None,
+                                        title='',
+                                        figxsize=3,
+                                        figysize=15,
+                                        img_filepath=None,
+                                        cmap='jet'):
+    if len(y_in.shape)!=1:
+        sys.exit('Problem with len(y_in.shape)!=1');
+    
+    if len(X_in.shape)==1:
+        Nx=1;
+    else:
+        Nx=X_in.shape[1];
+    
+    X=X_in.reshape((-1,Nx));
+    
+    mat_xy = AnI.x_against_y_mutual_inf(X,y_in.reshape((-1,1)),bins=bins,bandwidth=bandwidth);
+    
+    if labels_x==None:
+        labels_x=['f'+str(n) for n in range(Nx)];
+        
+    Zdat = sorted(zip(mat_xy.tolist(),labels_x));#, reverse=True
+    
+    DATA_COLUMNS_SORTED_m = [a for _,a in Zdat];
+    Data_SORTED           = [a for a,_ in Zdat];
+    
+    mat_xy_SORTED_m       = np.array(Data_SORTED).T
+    
+    plot_bar_vec_xy(  mat_xy_SORTED_m,
+                      labels_x=DATA_COLUMNS_SORTED_m,
+                      label_y='',
+                      title=title,
+                      figxsize=figxsize,
+                      figysize=figysize,
+                      img_filepath=img_filepath);
+    
+    return mat_xy_SORTED_m;
+
+#############################################################
 from sklearn.feature_selection import mutual_info_regression
 
 def plot_mutual_info_regression_x(  X_in,
