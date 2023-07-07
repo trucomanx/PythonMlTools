@@ -24,6 +24,10 @@ def all_against_all_mutual_inf( X,
     :return: Retorna una matriz cuadrada (Ncol x Ncol) con la información mutua de todos contra todos.
     :rtype: numpy array
     '''
+    
+    if(len(X.shape)<2):
+        sys.exit('The length shape of X should be 2. Current len(X.shape)='+str(len(X.shape)));
+    
     L=X.shape[0];
     N=X.shape[1];
     mat=np.zeros((N, N))
@@ -52,10 +56,14 @@ def all_against_all_mutual_inf( X,
 
             InfA=FI.InformationAnalysis(Pab);
             mutual=InfA.MutualInformation();
-            joint=InfA.JointEntropy();
-
-            mat[n][m]=mutual/joint;
-    return mat;
+            #joint=InfA.JointEntropy();
+            #mat[n][m]=mutual/joint;
+            mat[n][m]=mutual;
+    MAX=np.max(mat);
+    if MAX==0:
+        MAX=1;
+    
+    return mat/MAX;
 
 
 def x_against_y_mutual_inf( X,
@@ -81,13 +89,37 @@ def x_against_y_mutual_inf( X,
     '''
     if(X.shape[0]!=Y.shape[0]):
         sys.exit('Number of elements of inputs is not the same.');
-
+    
+    if(len(X.shape)<2):
+        sys.exit('The length shape of X should be 2. Current len(X.shape)='+str(len(X.shape)));
+    if(len(Y.shape)<2):
+        sys.exit('The length shape of Y should be 2. Current len(Y.shape)='+str(len(Y.shape)));
+    
     L=X.shape[0];
     N=X.shape[1];
     M=Y.shape[1];
     mat=np.zeros((N, M))
-    for n in range(N):
-        for m in range(M):
+    for m in range(M):
+        
+        # Segundo vector normalizado
+        Ym=Y[:,m];
+        Ym=Ym-np.sum(Ym);
+        STD=np.std(Ym);
+        if(STD!=0):
+            Ym=Ym/STD;
+        
+        yy=np.concatenate((np.reshape(Ym,(L,1)),np.reshape(Ym,(L,1))), axis=1);
+        kde = KernelDensity(kernel=kernel_type, bandwidth=bandwidth).fit(yy);
+
+        Pyy=kext.kde_get2d_joint_prob(  kde,
+                                        np.min(Ym),np.max(Ym),bins,
+                                        np.min(Ym),np.max(Ym),bins);
+        Pyy=(Pyy+Pyy.T)/2.0;
+        InfA=FI.InformationAnalysis(Pyy);
+        infY=InfA.MutualInformation();
+        
+        for n in range(N):
+            
             # Primer vector normalizado
             Xn=X[:,n];
             Xn=Xn-np.sum(Xn);
@@ -95,12 +127,6 @@ def x_against_y_mutual_inf( X,
             if(STD!=0):
                 Xn=Xn/STD;
             
-            # Segundo vector normalizado
-            Ym=Y[:,m];
-            Ym=Ym-np.sum(Ym);
-            STD=np.std(Ym);
-            if(STD!=0):
-                Ym=Ym/STD;
             
             xy=np.concatenate((np.reshape(Xn,(L,1)),np.reshape(Ym,(L,1))), axis=1)
             kde = KernelDensity(kernel=kernel_type, bandwidth=bandwidth).fit(xy);
@@ -111,9 +137,9 @@ def x_against_y_mutual_inf( X,
 
             InfA=FI.InformationAnalysis(Pab);
             mutual=InfA.MutualInformation();
-            joint=InfA.JointEntropy();
-
-            mat[n][m]=mutual/joint;
+            #joint=InfA.JointEntropy();
+            #mat[n][m]=mutual/joint;
+            mat[n][m]=mutual/infY;
     return mat;
 
 

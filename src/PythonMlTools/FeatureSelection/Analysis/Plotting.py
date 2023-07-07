@@ -248,7 +248,7 @@ def plot_mutual_info_regression_x(  X_in,
                   figysize=figsize,
                   img_filepath=img_filepath,
                   cmap=cmap);
-    print(np.max(MI_X))    
+    
     return MI_X;
     
 def plot_mutual_info_regression_xy( X_in,
