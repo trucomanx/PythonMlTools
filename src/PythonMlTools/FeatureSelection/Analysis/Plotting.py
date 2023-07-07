@@ -207,34 +207,3 @@ def plot_mutual_info_regression_xy( X_in,
     return MI_XY;
 
 
-def plot_mutual_information_x(  X_in,
-                                labels_x=None,
-                                title='',
-                                figsize=15,
-                                img_filepath=None,
-                                cmap='jet'):
-    if len(X_in.shape)==1:
-        Nx=1;
-    else:
-        Nx=X_in.shape[1];
-    
-    X=X_in.reshape((-1,Nx));
-    
-    L =X.shape[0];
-
-    MI_X=np.zeros((Nx,Ny))
-
-    for n in range(Nx):
-        for m in range(Nx):
-        MI_X[n,m]=mutual_info_regression(X[:,n], X[:,m])[0];
-    
-    plot_mat_xy(  MI_X.T,
-                  labels_x=labels_x,
-                  labels_y=labels_x,
-                  title=title,
-                  figxsize=figsize,
-                  figysize=figsize,
-                  img_filepath=img_filepath,
-                  cmap=cmap);
-    
-    return MI_X;
