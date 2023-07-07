@@ -204,7 +204,7 @@ def plot_sorted_mutual_info_bins_xy(    X_in,
     Data_SORTED           = [a for a,_ in Zdat];
     
     
-    plot_bar_vec_xy(  Data_SORTED.tolist(),
+    plot_bar_vec_xy(  Data_SORTED,
                       labels_x=DATA_COLUMNS_SORTED_m,
                       label_y='',
                       title=title,
