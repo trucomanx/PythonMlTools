@@ -14,11 +14,11 @@ def plot_bar_vec_xy(  VEC_XY,
                       horizontal=True):
     
     if horizontal:
+        fig = plt.figure(figsize=(figxsize, figysize)) # width and height in inches
+        plt.bar(labels_x, VEC_XY, edgecolor="white", linewidth=0.7,tick_label=labels_x)
+    else:
         fig = plt.figure(figsize=(figysize, figxsize)) # width and height in inches
         plt.barh(labels_x, VEC_XY, edgecolor="white", linewidth=0.7)
-    else:
-        fig = plt.figure(figsize=(figxsize, figysize)) # width and height in inches
-        plt.bar(labels_x, VEC_XY, edgecolor="white", linewidth=0.7)
     if isinstance(label_y,str):
         plt.ylabel(label_y);
     plt.title(title);
