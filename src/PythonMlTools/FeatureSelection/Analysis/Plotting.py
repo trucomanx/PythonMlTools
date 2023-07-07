@@ -203,7 +203,7 @@ def plot_sorted_mutual_info_bins_xy(    X_in,
     DATA_COLUMNS_SORTED_m = [a for _,a in Zdat];
     Data_SORTED           = [a for a,_ in Zdat];
     
-    mat_xy_SORTED_m       = np.array(Data_SORTED);
+    mat_xy_SORTED_m       = np.array(Data_SORTED).reshape((-1,));
     
     print('mat_xy_SORTED_m.shape:',mat_xy_SORTED_m.shape)
     
