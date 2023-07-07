@@ -40,6 +40,10 @@ def plot_mat_xy(  MAT_XY,
         pass;
     plt.show();
 
+################################################################################
+## Correlation analysis
+################################################################################
+
 def plot_corrcoef_x(X_in,
                     labels_x=None,
                     title='',
@@ -118,6 +122,37 @@ def plot_corrcoef_xy(   X_in,
                       cmap=cmap);
     return CORR_XY;
     
+
+################################################################################
+## Mutual information
+################################################################################
+
+def plot_mutual_info_bins_x(    X_in,
+                                bins,
+                                bandwidth,#=0.8/bins,
+                                labels_x=None,
+                                title='',
+                                figsize=15,
+                                img_filepath=None,
+                                cmap='jet'):
+    if len(X_in.shape)==1:
+        Nx=1;
+    else:
+        Nx=X_in.shape[1];
+    
+    X=X_in.reshape((-1,Nx));
+    
+    mat_x  = AnI.all_against_all_mutual_inf(X,bins=bins,bandwidth=bandwidth);
+    plot_mat_xy(  mat_x,
+                  labels_x=labels_x,
+                  labels_y=labels_x,
+                  title=title,
+                  figxsize=figsize,
+                  figysize=figsize,
+                  img_filepath=img_filepath,
+                  cmap=cmap)
+    return mat_x 
+
 from sklearn.feature_selection import mutual_info_regression
 
 def plot_mutual_info_regression_x(  X_in,
@@ -133,8 +168,6 @@ def plot_mutual_info_regression_x(  X_in,
     
     X=X_in.reshape((-1,Nx));
     
-    L =X.shape[0];
-
     MI_X=np.zeros((Nx,Nx))
 
     for n in range(Nx):
