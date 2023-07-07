@@ -355,4 +355,4 @@ def plot_mutual_info_regression_xy_vector(  X_in,
                       img_filepath=img_filepath,
                       horizontal=horizontal);
     
-    return MI_XY;
+    return mat_xy_SORTED_m;
