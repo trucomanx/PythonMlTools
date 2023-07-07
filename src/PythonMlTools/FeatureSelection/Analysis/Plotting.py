@@ -185,8 +185,7 @@ def plot_sorted_mutual_info_bins_xy(    X_in,
                                         title='',
                                         figxsize=3,
                                         figysize=15,
-                                        img_filepath=None,
-                                        cmap='jet'):
+                                        img_filepath=None):
     if len(y_in.shape)!=1:
         sys.exit('Problem with len(y_in.shape)!=1');
     
