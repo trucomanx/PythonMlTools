@@ -4,6 +4,8 @@ import seaborn as sns
 import matplotlib.pyplot as plt
 import numpy as np
 
+
+
 def plot_mat_xy(  MAT_XY,
                   labels_x=None,
                   labels_y=None,
@@ -126,6 +128,7 @@ def plot_corrcoef_xy(   X_in,
 ################################################################################
 ## Mutual information
 ################################################################################
+import PythonMlTools.FeatureSelection.Analysis.Information as AnI
 
 def plot_mutual_info_bins_x(    X_in,
                                 bins,
