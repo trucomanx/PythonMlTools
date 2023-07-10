@@ -43,8 +43,9 @@ class Binifier:
         
     def transform_x(self, X):
         X_new=np.zeros(X.shape);
-        N=X.shape[0];
-        L=X.shape[1]
+        L=X.shape[0];
+        N=X.shape[1];
+        
         for n in range(N):
             for l in range(L):
                 if self.Delta_X[n]==0:
