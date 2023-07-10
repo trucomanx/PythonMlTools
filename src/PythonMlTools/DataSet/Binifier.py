@@ -30,7 +30,7 @@ class Binifier:
         
         self.MIN_X=np.zeros((N,));
         self.MAX_X=np.zeros((N,));
-        self.Delta=np.zeros((N,));
+        self.Delta_X=np.zeros((N,));
         for n in range(N):
             self.MIN_X[n]=np.min(X[:,n]);
             self.MAX_X[n]=np.max(X[:,n]);
