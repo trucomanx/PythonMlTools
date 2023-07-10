@@ -12,10 +12,10 @@ class Binifier:
 
     def __init__(self, X, y,bins=10):
         
-        if isinstance(self.bins, int) and self.bins>0:
+        if isinstance(bins, int) and bins>0:
             self.bins=bins;
         else:
-            sys.exit('Problems, bins should be a nonzero positive integer. bins='+str(self.bins));
+            sys.exit('Problems, bins should be a nonzero positive integer. bins='+str(bins));
         
         if len(y.shape)!=1:
             sys.exit('The shape should have len(y.shape)==1, current:',str(len(y.shape)));
