@@ -16,7 +16,7 @@ def FuncSVCKfoldBestGaussian(epsilon_list,gamma_list,X_train, y_train,K=3):
         score_val=[];
         ng=0;
         for gamma in gamma_list:
-            ksvc = SVC(epsilon=epsilon,kernel="rbf",gamma=gamma);
+            ksvc = SVC(C=epsilon,kernel="rbf",gamma=gamma);
             cv = KFold(n_splits=K, random_state=1, shuffle=True);
             #ksvc.fit(X_train, y_train);
             
