@@ -360,3 +360,54 @@ def plot_mutual_info_regression_xy_vector(  X_in,
                       horizontal=horizontal);
     
     return mat_xy_SORTED_m;
+
+################################################################################
+################################################################################
+
+import numpy as np
+import sys
+import matplotlib.pyplot as plt
+
+def plot_features_vs_target(X,y,Ncols=3,fig_height=None,fig_width=15,label_x=None,label_y=None):
+    if len(X.shape)!=2:
+        sys.exit('Problems, the value len(X.shape) shoul be equald to 2, Current value: '+str(len(X.shape)));
+    if len(y.shape)!=1:
+        sys.exit('Problems, the value len(y.shape) shoul be equald to 1, Current value: '+str(len(y.shape)));
+    if X.shape[0]!=y.shape[0]:
+        sys.exit('Problems, the value X.shape[0]!=y.shape[0]');
+
+    L=X.shape[0];
+    N=X.shape[1];
+
+    if not isinstance(label_x,list):
+        label_x=[];
+        for n in range(N):
+            label_x.append('x'+str(n));
+            
+    if not isinstance(label_y,str):
+        label_y='y';
+
+
+    Ncols = int(Ncols)
+    Nlins = int(np.ceil(N*1.0/Ncols));
+
+    
+    if fig_height is None:
+        fig_height=(fig_width*Nlins*1.0)/Ncols;
+
+    fig, axs = plt.subplots(Nlins, Ncols);
+    fig.set_figwidth(fig_width);
+    fig.set_figheight(fig_height);
+    fig.tight_layout(pad=2.0)
+    n=0;
+    for l in range(Nlins):
+        for c in range(Ncols):
+            if n<N:
+                axs[l, c].scatter(X[:,n], y)
+                axs[l, c].set_xlabel(label_x[n])
+                if c==0:
+                    axs[l, c].set_ylabel(label_y)
+                #axs[l, c].set_title(label_x[n]+' vs '+label_y);
+                n=n+1;
+
+
