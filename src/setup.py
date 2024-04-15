@@ -22,7 +22,7 @@ setup(
     #long_description=open('README.txt').read(),
     install_requires=[
        "sklearn", #"Django >= 1.1.1",
-       "tqdm",
+       "tqdm", #
        "numpy"
     ],
 )
