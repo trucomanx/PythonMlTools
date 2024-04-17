@@ -21,7 +21,7 @@ setup(
     description='Machine learning tools',
     #long_description=open('README.txt').read(),
     install_requires=[
-       "sklearn", #"Django >= 1.1.1",
+       "scikit-learn", #"Django >= 1.1.1",
        "tqdm", #
        "numpy"
     ],
