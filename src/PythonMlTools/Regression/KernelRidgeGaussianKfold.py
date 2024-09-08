@@ -73,7 +73,8 @@ def FuncPlotDataKfold(  krr_opt,
                         mean_y,std_y,
                         gamma_list,
                         X_test, y_test,
-                        Line=True):
+                        Line=True,
+                        file_img_out=None):
     plot.figure(figsize=(6, 5))
     plot.plot(gamma_list, score_val_opt);
     plot.xlabel('gamma.');
@@ -110,7 +111,8 @@ def FuncPlotDataKfold(  krr_opt,
     plot.xlabel('real');
     plot.ylabel('predict');
     plot.title('R^2 (test): '+str(R2_test))
-    
+    if not file_img_out is None: 
+        plot.savefig(file_img_out);
     plot.show()
     
     MAPE=mean_absolute_percentage_error(Yreal,Ypred);
