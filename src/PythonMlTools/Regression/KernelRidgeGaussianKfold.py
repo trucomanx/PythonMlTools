@@ -111,7 +111,7 @@ def FuncPlotDataKfold(  krr_opt,
     plot.xlabel('real');
     plot.ylabel('predict');
     plot.title('R^2 (test): '+str(R2_test))
-    if not file_img_out is None: 
+    if file_img_out is not None: 
         plot.savefig(file_img_out);
     plot.show()
     
