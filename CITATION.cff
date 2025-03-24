@@ -1,0 +1,12 @@
+cff-version: 1.2.0
+message: "If you use this software, please cite it as below."
+authors:
+  - family-names: Pujaico Rivera
+    given-names: Fernando
+    orcid: https://orcid.org/0000-0002-4970-2818
+title: "Machine Learning Tools in Python"
+version: v0.1.2
+identifiers:
+  - type: doi
+    value: 10.5281/zenodo.15079664
+date-released: 2023-03-21
