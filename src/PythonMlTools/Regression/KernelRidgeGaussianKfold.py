@@ -4,8 +4,12 @@ from sklearn.kernel_ridge import KernelRidge
 from sklearn.model_selection import cross_val_score
 from sklearn.model_selection import KFold
 from sklearn.metrics import mean_absolute_percentage_error
-from tqdm.notebook import tqdm
 import numpy as np
+
+
+    
+from PythonMlTools.Tqdm import get_tqdm
+tqdm = get_tqdm()
 
 def FuncKernelRidgeKfoldBestGaussian(alpha_list,gamma_list,X_train, y_train,K=3):
     found=False; k=0; 

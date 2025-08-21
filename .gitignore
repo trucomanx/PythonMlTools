@@ -10,3 +10,5 @@
 /src/PythonMlTools/__pycache__
 /src/dist
 /src/PythonMlTools.egg-info
+/src/PythonMlTools/FeatureSelection/__pycache__/
+/src/PythonMlTools/Regression/__pycache__/

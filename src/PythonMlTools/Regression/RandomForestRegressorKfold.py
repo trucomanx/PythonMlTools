@@ -4,8 +4,10 @@ from sklearn.ensemble import RandomForestRegressor
 from sklearn.model_selection import cross_val_score
 from sklearn.model_selection import KFold
 from sklearn.metrics import mean_absolute_percentage_error
-from tqdm.notebook import tqdm
 import numpy as np
+
+from PythonMlTools.Tqdm import get_tqdm
+tqdm = get_tqdm()
 
 def FuncRandomForestRegressorKfold( n_estimators_list,
                                     max_depth_list,

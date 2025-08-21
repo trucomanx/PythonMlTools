@@ -2,7 +2,9 @@
 from sklearn.kernel_ridge import KernelRidge
 import numpy as np
 from sklearn.metrics import mean_absolute_percentage_error
-from tqdm.notebook import tqdm
+
+from PythonMlTools.Tqdm import get_tqdm
+tqdm = get_tqdm()
 
 def FuncKernelRidgeBestGaussian(alpha_list,gamma_list,X_train, y_train,X_val, y_val):
     found=False; k=0; 
