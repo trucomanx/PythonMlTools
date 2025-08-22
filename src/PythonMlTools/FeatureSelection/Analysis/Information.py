@@ -9,7 +9,8 @@ import sys
 def all_against_all_mutual_inf( X,
                                 bins=10,
                                 bandwidth=0.08,
-                                kernel_type='gaussian'):
+                                kernel_type='gaussian',
+                                IoU=True):
     '''
     Lee un archivo de imagen `filepath` y retorna las anotaciones y la imagen leida.
 
@@ -56,21 +57,29 @@ def all_against_all_mutual_inf( X,
 
             InfA=FI.InformationAnalysis(Pab);
             mutual=InfA.MutualInformation();
-            #joint=InfA.JointEntropy();
-            #mat[n][m]=mutual/joint;
-            mat[n][m]=mutual;
-    MAX=np.max(mat);
-    if MAX==0:
-        MAX=1;
+            
+            if IoU:
+                joint=InfA.JointEntropy();
+                mat[n][m]=mutual/joint;
+            else:
+                mat[n][m]=mutual;
     
-    return mat/MAX;
+    if IoU:
+        return mat
+    else:
+        MAX=np.max(mat);
+        if MAX==0:
+            MAX=1;
+        
+        return mat/MAX;
 
 
 def x_against_y_mutual_inf( X,
                             Y,
                             bins=10,
                             bandwidth=0.08,
-                            kernel_type='gaussian'):
+                            kernel_type='gaussian',
+                            IoU=True):
     '''
     Lee un archivo de imagen `filepath` y retorna las anotaciones y la imagen leida.
 
@@ -108,15 +117,16 @@ def x_against_y_mutual_inf( X,
         if(STD!=0):
             Ym=Ym/STD;
         
-        yy=np.concatenate((np.reshape(Ym,(L,1)),np.reshape(Ym,(L,1))), axis=1);
-        kde = KernelDensity(kernel=kernel_type, bandwidth=bandwidth).fit(yy);
+        infY = None
+        if not IoU:
+            yy=np.concatenate((np.reshape(Ym,(L,1)),np.reshape(Ym,(L,1))), axis=1);
+            kde = KernelDensity(kernel=kernel_type, bandwidth=bandwidth).fit(yy);
 
-        Pyy=kext.kde_get2d_joint_prob(  kde,
-                                        np.min(Ym),np.max(Ym),bins,
-                                        np.min(Ym),np.max(Ym),bins);
-        Pyy=(Pyy+Pyy.T)/2.0;
-        InfA=FI.InformationAnalysis(Pyy);
-        infY=InfA.MutualInformation();
+            Pyy=kext.kde_get2d_joint_prob(  kde,
+                                            np.min(Ym),np.max(Ym),bins,
+                                            np.min(Ym),np.max(Ym),bins);
+            Pyy=(Pyy+Pyy.T)/2.0;
+            infY=FI.InformationAnalysis(Pyy).MutualInformation();
         
         for n in range(N):
             
@@ -137,9 +147,12 @@ def x_against_y_mutual_inf( X,
 
             InfA=FI.InformationAnalysis(Pab);
             mutual=InfA.MutualInformation();
-            #joint=InfA.JointEntropy();
-            #mat[n][m]=mutual/joint;
-            mat[n][m]=mutual/infY;
+            
+            if IoU:
+                joint=InfA.JointEntropy();
+                mat[n][m]=mutual/joint;
+            else:
+                mat[n][m]=mutual/infY;
     return mat;
 
 
